@@ -16,7 +16,7 @@ protocol ListViewModelInput {
 }
 
 protocol ListViewModelOutput {
-    var items: Observable<[ListItemViewModel]> { get } /// Also we can calculate view model items on demand:  https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/pull/10/files
+    var items: Observable<[ListItemViewModel]> { get }
     var query: Observable<String> { get }
     var error: Observable<String> { get }
     var isEmpty: Bool { get }
@@ -54,7 +54,12 @@ final class DefaultListViewModel: ListViewModel {
         loadTask = searchUseCase.execute(requestValue: string, cached: { (items) in
             
         }, completion: { (result) in
-            
+            switch result {
+            case .success(let page):
+                break
+            case .failure(let error):
+                break
+            }
         })
     }
 }

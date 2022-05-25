@@ -13,8 +13,8 @@ final class AppDIContainer {
     
     // MARK: - Network
     lazy var networkService: Networkable = {
-        let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseURL)!)
-        
+        let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.apiBaseURL)!,
+                                          queryParameters: ["appid": appConfiguration.appID])
         return NetworkService(config: config)
     }()
     

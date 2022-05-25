@@ -21,11 +21,11 @@ final class DefaultQueriesRepository {
 
 extension DefaultQueriesRepository: QueriesRepository {
     
-    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[String], Error>) -> Void) {
+    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[String], NetworkError>) -> Void) {
         
     }
     
-    func saveRecentQuery(query: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func saveRecentQuery(query: String, completion: @escaping (Result<String, NetworkError>) -> Void) {
         
     }
 }

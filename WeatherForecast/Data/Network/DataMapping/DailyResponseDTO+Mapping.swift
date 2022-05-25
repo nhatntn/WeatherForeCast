@@ -1,5 +1,5 @@
 //
-//  WeatherForecaseInfo.swift
+//  DailyResponseDTO+Mapping.swift
 //  WeatherForecast
 //
 //  Created by Sarah Nguyen on 24/05/2022.
@@ -7,25 +7,45 @@
 
 import Foundation
 
-class WeatherForecastInfo: Codable {
-    let listItems: [WeatherForecastItem]
-    var expiryTime: TimeInterval?
+public struct DailyResponseDTO: Decodable {
+    let data: WeatherForecastData?
+    let error: ResponseError?
+        
+    enum ResponseKeys: String, CodingKey {
+        case code = "cod"
+    }
     
+    public init(from decoder: Swift.Decoder) throws {
+        let container = try decoder.container(keyedBy: ResponseKeys.self)
+        let code = try container.decode(String.self, forKey: .code)
+        
+        if code != "200" {
+            self.error = try ResponseError(from: decoder)
+            self.data = nil
+            return
+        }
+        
+        self.data = try WeatherForecastData.init(from: decoder)
+        self.error = nil
+    }
+    
+}
+
+class WeatherForecastData: Codable {
+    let listItems: [WeatherForecastItem]
+
     enum WeatherForecastInfoKeys: String, CodingKey {
         case listItems = "list"
-        case expiryTime = "expiry_time"
     }
     
     required init(from decoder: Swift.Decoder) throws {
         let parentContainer = try decoder.container(keyedBy: WeatherForecastInfoKeys.self)
         self.listItems = try parentContainer.decode([WeatherForecastItem].self, forKey: .listItems)
-        self.expiryTime = try parentContainer.decodeIfPresent(TimeInterval.self, forKey: .expiryTime)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: WeatherForecastInfoKeys.self)
         try container.encode(self.listItems, forKey: .listItems)
-        try container.encode(self.expiryTime, forKey: .expiryTime)
     }
 }
 

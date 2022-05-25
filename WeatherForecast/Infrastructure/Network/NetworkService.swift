@@ -12,6 +12,7 @@ public enum NetworkError: Error {
     case notConnected
     case cancelled
     case invalidURL
+    case invalidJSON
 }
 
 public protocol NetworkCancellable {
@@ -60,7 +61,7 @@ public final class NetworkService: Networkable {
                 completion(.success(data))
             }
         }
-        
+        task.resume()
         return task
     }
     
@@ -78,7 +79,7 @@ public final class NetworkService: Networkable {
         return self.request(endpoint: endpoint) { result in
             switch result {
             case .success:
-                DispatchQueue.main.async { return completion(.success(nil)) }
+                DispatchQueue.main.async { return completion(result) }
             case .failure(let error):
                 let error = self.resolve(error: error)
                 DispatchQueue.main.async { return completion(.failure(error)) }
