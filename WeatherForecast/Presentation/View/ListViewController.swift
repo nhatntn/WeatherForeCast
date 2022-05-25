@@ -35,12 +35,24 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        bind(to: viewModel)
+    }
+    
+    private func bind(to viewModel: ListViewModel) {
+        viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
     }
     
     // MARK: - Private
     func setupViews() {
         title = viewModel.screenTitle
         setupSearchController()
+    }
+    
+    private func showError(_ error: String) {
+        guard !error.isEmpty else { return }
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

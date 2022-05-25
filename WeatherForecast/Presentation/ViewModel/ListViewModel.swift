@@ -12,7 +12,6 @@ protocol ListViewModelInput {
     func didCancelSearch()
     func showQueriesSuggestions()
     func closeQueriesSuggestions()
-    func didSelectItem(at index: Int)
 }
 
 protocol ListViewModelOutput {
@@ -48,29 +47,39 @@ final class DefaultListViewModel: ListViewModel {
         self.actions = actions
     }
     
-    // MARK: -
+    // MARK: - Private
     private func query(with string: String) {
         query.value = string
         loadTask = searchUseCase.execute(requestValue: string, cached: { (items) in
             
         }, completion: { (result) in
             switch result {
-            case .success(let page):
+            case .success(let items):
                 break
             case .failure(let error):
-                break
+                self.handle(error: error)
             }
         })
+    }
+    
+    private func handle(error: NetworkError) {
+        switch error {
+        case .notConnected:
+            self.error.value = "No internet connection"
+        case .invalidJSON, .invalidURL:
+            self.error.value = "Something went wrong. Check your input again!"
+        case .error(_, data: nil):
+            self.error.value = "Can't find related locations"
+        default:
+            self.error.value = "Something went wrong. Please try again!"
+        }
     }
 }
 
 // MARK: - INPUT. View event methods
 extension DefaultListViewModel {
     func didSearch(query: String) {
-        guard !query.isEmpty else {
-            return
-        }
-        self.query(with: query)
+        
     }
 
     func didCancelSearch() {
@@ -82,10 +91,6 @@ extension DefaultListViewModel {
     }
 
     func closeQueriesSuggestions() {
-        
-    }
-
-    func didSelectItem(at index: Int) {
         
     }
 }
