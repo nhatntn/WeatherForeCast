@@ -50,11 +50,14 @@ class ListViewController: UIViewController {
     func setupViews() {
         title = viewModel.screenTitle
         setupSearchController()
+        setupTableViews()
     }
     
     private func setupTableViews() {
         tableView.estimatedRowHeight = ListItemCell.height
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.alwaysBounceVertical = false
+        tableView.allowsSelection = false
     }
     
     private func updateItems() {
@@ -76,10 +79,7 @@ extension ListViewController {
         searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
-        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = true
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.frame = searchBarContainer.bounds
-        searchController.searchBar.autoresizingMask = [.flexibleWidth]
         searchBarContainer.addSubview(searchController.searchBar)
     }
 }

@@ -27,16 +27,20 @@ final class ListItemCell: UITableViewCell {
         self.viewModel = viewModel
         self.iconRepository = iconRepository
         
+        let customFont = UIFont.preferredFont(forTextStyle: .body)
+        [dateLabel, averageTempLabel, pressureLabel, humidityLabel, descriptionLabel].forEach { label in
+            label?.adjustsFontSizeToFitWidth = true
+            label?.minimumScaleFactor = 0.7
+            label?.adjustsFontForContentSizeCategory = true
+            label?.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: customFont)
+        }
+        
         dateLabel.text = "Date: \(viewModel.dateLabel ?? "")"
         averageTempLabel.text = "Avarage Temperature: \(viewModel.averageTempLabel ?? "")°C"
         pressureLabel.text = "Pressure: \(viewModel.pressureLabel ?? "")"
         humidityLabel.text = "Humidity: \(viewModel.humidityLabel ?? "")%"
         descriptionLabel.text = "Description: \(viewModel.descriptionLabel ?? "")"
         updateIcon()
-    }
-    
-    private func buildImagePath(iconName: String) -> String {
-        return ""
     }
     
     private func updateIcon() {
