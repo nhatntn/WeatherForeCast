@@ -32,22 +32,24 @@ public protocol Networkable {
 
 public final class NetworkService: Networkable {
     private let config: NetworkConfigurable
+    private let urlSession: URLSessionManageable
     
-    public init(config: NetworkConfigurable) {
+    public init(config: NetworkConfigurable, urlSession: URLSessionManageable = URLSessionManager()) {
+        self.urlSession = urlSession
         self.config = config
     }
     
     private func resolve(error: Error) -> NetworkError {
         let code = URLError.Code(rawValue: (error as NSError).code)
         switch code {
-            case .notConnectedToInternet: return .notConnected
-            case .cancelled: return .cancelled
-            default: return .notConnected
+        case .notConnectedToInternet: return .notConnected
+        case .cancelled: return .cancelled
+        default: return .notConnected
         }
     }
     
     private func request(request: URLRequest, completion: @escaping CompletionHandler) -> NetworkCancellable {
-        let task = URLSession.shared.dataTask(with: request) { data, response, requestError in
+        return urlSession.request(request) { data, response, requestError in
             if let requestError = requestError {
                 var error: NetworkError
                 if let response = response as? HTTPURLResponse {
@@ -61,8 +63,6 @@ public final class NetworkService: Networkable {
                 completion(.success(data))
             }
         }
-        task.resume()
-        return task
     }
     
     public func request(endpoint: Requestable, completion: @escaping CompletionHandler) -> NetworkCancellable? {
@@ -87,4 +87,21 @@ public final class NetworkService: Networkable {
         }
     }
     
+}
+
+public protocol URLSessionManageable {
+    typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
+    
+    func request(_ request: URLRequest,
+                 completion: @escaping CompletionHandler) -> NetworkCancellable
+}
+
+public class URLSessionManager: URLSessionManageable {
+    public init() {}
+    public func request(_ request: URLRequest,
+                        completion: @escaping CompletionHandler) -> NetworkCancellable {
+        let task = URLSession.shared.dataTask(with: request, completionHandler: completion)
+        task.resume()
+        return task
+    }
 }

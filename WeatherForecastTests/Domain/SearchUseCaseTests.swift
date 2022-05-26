@@ -17,4 +17,6 @@ class SearchUseCaseTests: XCTestCase {
             return nil
         }
     }
+    
+    
 }

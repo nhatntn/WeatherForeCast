@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchFlowCoordinatorDependencies  {
-    func makeListViewController(actions: ListViewModelActions) -> ListViewController
+    func makeListViewController() -> ListViewController
 }
 
 final class SearchFlowCoordinator {
@@ -25,9 +25,7 @@ final class SearchFlowCoordinator {
     }
     
     func start() {
-        let actions = ListViewModelActions(showQueriesSuggestions: showQueriesSuggestions,
-                                           closeQueriesSuggestions: closeQueriesSuggestions)
-        let vc = dependencies.makeListViewController(actions: actions)
+        let vc = dependencies.makeListViewController()
         
         naviController?.pushViewController(vc, animated: false)
         listVC = vc

@@ -23,7 +23,6 @@ protocol ListViewModel: ListViewModelInput, ListViewModelOutput {}
 
 final class DefaultListViewModel: ListViewModel {
     private let searchUseCase: SearchUseCase
-    private let actions: ListViewModelActions?
     
     // MARK: - OUTPUT
     let items: Observable<[ListItemViewModel]> = Observable([])
@@ -33,10 +32,8 @@ final class DefaultListViewModel: ListViewModel {
     let searchBarPlaceholder = NSLocalizedString("Search", comment: "")
     
     // MARK: - Init
-    init(searchUseCase: SearchUseCase,
-         actions: ListViewModelActions? = nil) {
+    init(searchUseCase: SearchUseCase) {
         self.searchUseCase = searchUseCase
-        self.actions = actions
     }
     
     // MARK: - Private

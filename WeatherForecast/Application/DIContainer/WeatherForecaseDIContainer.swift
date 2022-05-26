@@ -38,15 +38,14 @@ final class WeatherForecaseDIContainer {
                                      dependencies: self)
     }
     
-    func makeListViewModel(actions: ListViewModelActions) -> ListViewModel {
-        return DefaultListViewModel(searchUseCase: makeSearchUseCase(),
-                                    actions: actions)
+    func makeListViewModel() -> ListViewModel {
+        return DefaultListViewModel(searchUseCase: makeSearchUseCase())
     }
 }
 
 
 extension WeatherForecaseDIContainer: SearchFlowCoordinatorDependencies {
-    func makeListViewController(actions: ListViewModelActions) -> ListViewController {
-        return ListViewController.create(with: makeListViewModel(actions: actions))
+    func makeListViewController() -> ListViewController {
+        return ListViewController.create(with: makeListViewModel())
     }
 }
