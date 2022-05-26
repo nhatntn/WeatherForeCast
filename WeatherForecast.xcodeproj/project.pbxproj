@@ -21,14 +21,10 @@
 		B1C9BC88283E71E400232047 /* ListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC87283E71E400232047 /* ListItemViewModel.swift */; };
 		B1C9BC91283E730D00232047 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC90283E730D00232047 /* SearchUseCase.swift */; };
 		B1C9BC97283E73FD00232047 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC96283E73FD00232047 /* Repository.swift */; };
-		B1C9BC9C283E74C600232047 /* QueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC9B283E74C600232047 /* QueriesRepository.swift */; };
 		B1C9BCA2283E76D500232047 /* ResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCA1283E76D500232047 /* ResponseStorage.swift */; };
 		B1C9BCAB283E77A700232047 /* DefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCAA283E77A700232047 /* DefaultRepository.swift */; };
-		B1C9BCB3283E783900232047 /* QueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCB2283E783900232047 /* QueriesStorage.swift */; };
-		B1C9BCB8283E78DC00232047 /* CoreDataQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCB7283E78DC00232047 /* CoreDataQueriesStorage.swift */; };
 		B1C9BCBD283E791B00232047 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCBC283E791B00232047 /* CoreDataStorage.swift */; };
 		B1C9BCC2283E79BE00232047 /* CoreDataResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCC1283E79BE00232047 /* CoreDataResponseStorage.swift */; };
-		B1C9BCCA283E7B4900232047 /* DefaultQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCC9283E7B4900232047 /* DefaultQueriesRepository.swift */; };
 		B1C9BCF4283E93AA00232047 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCF3283E93AA00232047 /* API.swift */; };
 		B1C9BCFC283E94A300232047 /* DailyRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCFB283E94A300232047 /* DailyRequestDTO+Mapping.swift */; };
 		B1C9BD1D283EAC8B00232047 /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD1C283EAC8B00232047 /* ResponseError.swift */; };
@@ -36,6 +32,33 @@
 		B1C9BD30283F5D1B00232047 /* WeatherForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD2F283F5D1B00232047 /* WeatherForecastData.swift */; };
 		B1C9BD35283F5D3000232047 /* WeatherForecastItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD34283F5D3000232047 /* WeatherForecastItem.swift */; };
 		B1C9BD3C283F5EEF00232047 /* WeatherForecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD3A283F5EEF00232047 /* WeatherForecast.xcdatamodeld */; };
+		B1C9BD47283F8CA500232047 /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD46283F8CA500232047 /* DateFormatterHelper.swift */; };
+		B1C9BD58283F8F6B00232047 /* DTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD57283F8F6B00232047 /* DTO+Mapping.swift */; };
+		B1C9BD60283F903C00232047 /* Entity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD5F283F903C00232047 /* Entity+Mapping.swift */; };
+		B1C9BD6D283F91E700232047 /* SearchUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD6C283F91E700232047 /* SearchUseCaseTests.swift */; };
+		B1C9BD74283F929000232047 /* ListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD27283F25A600232047 /* ListItemCell.swift */; };
+		B1C9BD75283F929000232047 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78E8E28390C18001018FE /* ListViewController.swift */; };
+		B1C9BD79283F929600232047 /* ListViewModelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC6E283E6F1F00232047 /* ListViewModelActions.swift */; };
+		B1C9BD7A283F929600232047 /* ListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC87283E71E400232047 /* ListItemViewModel.swift */; };
+		B1C9BD7B283F929600232047 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC79283E715D00232047 /* ListViewModel.swift */; };
+		B1C9BD7F283F929D00232047 /* SearchFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC68283E6DA000232047 /* SearchFlowCoordinator.swift */; };
+		B1C9BD83283F92A100232047 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC96283E73FD00232047 /* Repository.swift */; };
+		B1C9BD87283F92A300232047 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC90283E730D00232047 /* SearchUseCase.swift */; };
+		B1C9BD8B283F92A700232047 /* WeatherForecastItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD34283F5D3000232047 /* WeatherForecastItem.swift */; };
+		B1C9BD8C283F92A700232047 /* WeatherForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD2F283F5D1B00232047 /* WeatherForecastData.swift */; };
+		B1C9BD90283F92AB00232047 /* DefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCAA283E77A700232047 /* DefaultRepository.swift */; };
+		B1C9BD94283F92B100232047 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCBC283E791B00232047 /* CoreDataStorage.swift */; };
+		B1C9BD95283F92B100232047 /* CoreDataResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCC1283E79BE00232047 /* CoreDataResponseStorage.swift */; };
+		B1C9BD99283F92B500232047 /* ResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCA1283E76D500232047 /* ResponseStorage.swift */; };
+		B1C9BD9D283F92B900232047 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCF3283E93AA00232047 /* API.swift */; };
+		B1C9BDA1283F92BC00232047 /* DailyResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16FD963283D37EB009C4BE2 /* DailyResponseDTO+Mapping.swift */; };
+		B1C9BDA2283F92BC00232047 /* DailyRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BCFB283E94A300232047 /* DailyRequestDTO+Mapping.swift */; };
+		B1C9BDA6283F92C000232047 /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD1C283EAC8B00232047 /* ResponseError.swift */; };
+		B1C9BDA7283F92C000232047 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16FD996283DCACB009C4BE2 /* Endpoint.swift */; };
+		B1C9BDA8283F92C000232047 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16FD991283DCA88009C4BE2 /* NetworkService.swift */; };
+		B1C9BDA9283F92C000232047 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16FD99B283DCBD0009C4BE2 /* Config.swift */; };
+		B1C9BDAD283F92C400232047 /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD46283F8CA500232047 /* DateFormatterHelper.swift */; };
+		B1C9BDAE283F92C400232047 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BC7F283E719500232047 /* Observable.swift */; };
 		B1E78E8B28390C18001018FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78E8A28390C18001018FE /* AppDelegate.swift */; };
 		B1E78E8F28390C18001018FE /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78E8E28390C18001018FE /* ListViewController.swift */; };
 		B1E78E9228390C18001018FE /* ListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1E78E9028390C18001018FE /* ListViewController.storyboard */; };
@@ -78,14 +101,10 @@
 		B1C9BC87283E71E400232047 /* ListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemViewModel.swift; sourceTree = "<group>"; };
 		B1C9BC90283E730D00232047 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		B1C9BC96283E73FD00232047 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		B1C9BC9B283E74C600232047 /* QueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueriesRepository.swift; sourceTree = "<group>"; };
 		B1C9BCA1283E76D500232047 /* ResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStorage.swift; sourceTree = "<group>"; };
 		B1C9BCAA283E77A700232047 /* DefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRepository.swift; sourceTree = "<group>"; };
-		B1C9BCB2283E783900232047 /* QueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueriesStorage.swift; sourceTree = "<group>"; };
-		B1C9BCB7283E78DC00232047 /* CoreDataQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataQueriesStorage.swift; sourceTree = "<group>"; };
 		B1C9BCBC283E791B00232047 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		B1C9BCC1283E79BE00232047 /* CoreDataResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataResponseStorage.swift; sourceTree = "<group>"; };
-		B1C9BCC9283E7B4900232047 /* DefaultQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQueriesRepository.swift; sourceTree = "<group>"; };
 		B1C9BCF3283E93AA00232047 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		B1C9BCFB283E94A300232047 /* DailyRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
 		B1C9BD1C283EAC8B00232047 /* ResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
@@ -93,6 +112,10 @@
 		B1C9BD2F283F5D1B00232047 /* WeatherForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastData.swift; sourceTree = "<group>"; };
 		B1C9BD34283F5D3000232047 /* WeatherForecastItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastItem.swift; sourceTree = "<group>"; };
 		B1C9BD3B283F5EEF00232047 /* WeatherForecast.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherForecast.xcdatamodel; sourceTree = "<group>"; };
+		B1C9BD46283F8CA500232047 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
+		B1C9BD57283F8F6B00232047 /* DTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTO+Mapping.swift"; sourceTree = "<group>"; };
+		B1C9BD5F283F903C00232047 /* Entity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Mapping.swift"; sourceTree = "<group>"; };
+		B1C9BD6C283F91E700232047 /* SearchUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCaseTests.swift; sourceTree = "<group>"; };
 		B1E78E8728390C18001018FE /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1E78E8A28390C18001018FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1E78E8E28390C18001018FE /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				B1C9BC7F283E719500232047 /* Observable.swift */,
+				B1C9BD46283F8CA500232047 /* DateFormatterHelper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -200,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				B1C9BC96283E73FD00232047 /* Repository.swift */,
-				B1C9BC9B283E74C600232047 /* QueriesRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -210,7 +233,6 @@
 			children = (
 				B1C9BD39283F5EAD00232047 /* CoreData */,
 				B1C9BCA1283E76D500232047 /* ResponseStorage.swift */,
-				B1C9BCB2283E783900232047 /* QueriesStorage.swift */,
 			);
 			path = PersistentStorages;
 			sourceTree = "<group>";
@@ -219,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				B1C9BCAA283E77A700232047 /* DefaultRepository.swift */,
-				B1C9BCC9283E7B4900232047 /* DefaultQueriesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -237,12 +258,29 @@
 		B1C9BD39283F5EAD00232047 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				B1C9BCB7283E78DC00232047 /* CoreDataQueriesStorage.swift */,
 				B1C9BCC1283E79BE00232047 /* CoreDataResponseStorage.swift */,
 				B1C9BCBC283E791B00232047 /* CoreDataStorage.swift */,
 				B1C9BD3A283F5EEF00232047 /* WeatherForecast.xcdatamodeld */,
+				B1C9BD67283F90E100232047 /* Mapping */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		B1C9BD67283F90E100232047 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				B1C9BD57283F8F6B00232047 /* DTO+Mapping.swift */,
+				B1C9BD5F283F903C00232047 /* Entity+Mapping.swift */,
+			);
+			path = Mapping;
+			sourceTree = "<group>";
+		};
+		B1C9BD6B283F91BC00232047 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B1C9BD6C283F91E700232047 /* SearchUseCaseTests.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		B1E78E7E28390C18001018FE = {
@@ -282,6 +320,7 @@
 		B1E78EA028390C1B001018FE /* WeatherForecastTests */ = {
 			isa = PBXGroup;
 			children = (
+				B1C9BD6B283F91BC00232047 /* Domain */,
 				B1E78EA128390C1B001018FE /* WeatherForecastTests.swift */,
 				B1E78EA328390C1B001018FE /* Info.plist */,
 			);
@@ -500,29 +539,28 @@
 				B1C9BCBD283E791B00232047 /* CoreDataStorage.swift in Sources */,
 				B1C9BD30283F5D1B00232047 /* WeatherForecastData.swift in Sources */,
 				B16FD964283D37EB009C4BE2 /* DailyResponseDTO+Mapping.swift in Sources */,
-				B1C9BCB8283E78DC00232047 /* CoreDataQueriesStorage.swift in Sources */,
 				B1C9BC80283E719500232047 /* Observable.swift in Sources */,
 				B16FD997283DCACB009C4BE2 /* Endpoint.swift in Sources */,
 				B1C9BC7A283E715D00232047 /* ListViewModel.swift in Sources */,
 				B1E78E8F28390C18001018FE /* ListViewController.swift in Sources */,
 				B1C9BC88283E71E400232047 /* ListItemViewModel.swift in Sources */,
 				B1C9BCF4283E93AA00232047 /* API.swift in Sources */,
-				B1C9BCB3283E783900232047 /* QueriesStorage.swift in Sources */,
 				B1C9BD35283F5D3000232047 /* WeatherForecastItem.swift in Sources */,
 				B1C9BCFC283E94A300232047 /* DailyRequestDTO+Mapping.swift in Sources */,
 				B16FD992283DCA88009C4BE2 /* NetworkService.swift in Sources */,
+				B1C9BD58283F8F6B00232047 /* DTO+Mapping.swift in Sources */,
 				B1E78E8B28390C18001018FE /* AppDelegate.swift in Sources */,
 				B16FD981283D3E92009C4BE2 /* AppFlowCoordinator.swift in Sources */,
-				B1C9BCCA283E7B4900232047 /* DefaultQueriesRepository.swift in Sources */,
 				B1C9BCAB283E77A700232047 /* DefaultRepository.swift in Sources */,
+				B1C9BD47283F8CA500232047 /* DateFormatterHelper.swift in Sources */,
 				B1E78EE32839127A001018FE /* AppConfigurations.swift in Sources */,
 				B16FD99C283DCBD0009C4BE2 /* Config.swift in Sources */,
-				B1C9BC9C283E74C600232047 /* QueriesRepository.swift in Sources */,
 				B1C9BCA2283E76D500232047 /* ResponseStorage.swift in Sources */,
 				B1C9BC69283E6DA000232047 /* SearchFlowCoordinator.swift in Sources */,
 				B1C9BC91283E730D00232047 /* SearchUseCase.swift in Sources */,
 				B1C9BCC2283E79BE00232047 /* CoreDataResponseStorage.swift in Sources */,
 				B1C9BD28283F25A600232047 /* ListItemCell.swift in Sources */,
+				B1C9BD60283F903C00232047 /* Entity+Mapping.swift in Sources */,
 				B16FD987283DC911009C4BE2 /* AppDIContainer.swift in Sources */,
 				B1C9BD3C283F5EEF00232047 /* WeatherForecast.xcdatamodeld in Sources */,
 				B1C9BC6F283E6F1F00232047 /* ListViewModelActions.swift in Sources */,
@@ -536,7 +574,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C9BDA8283F92C000232047 /* NetworkService.swift in Sources */,
+				B1C9BD7F283F929D00232047 /* SearchFlowCoordinator.swift in Sources */,
+				B1C9BD8C283F92A700232047 /* WeatherForecastData.swift in Sources */,
 				B1E78EA228390C1B001018FE /* WeatherForecastTests.swift in Sources */,
+				B1C9BD7A283F929600232047 /* ListItemViewModel.swift in Sources */,
+				B1C9BD99283F92B500232047 /* ResponseStorage.swift in Sources */,
+				B1C9BDAD283F92C400232047 /* DateFormatterHelper.swift in Sources */,
+				B1C9BDA1283F92BC00232047 /* DailyResponseDTO+Mapping.swift in Sources */,
+				B1C9BD95283F92B100232047 /* CoreDataResponseStorage.swift in Sources */,
+				B1C9BDA7283F92C000232047 /* Endpoint.swift in Sources */,
+				B1C9BDA6283F92C000232047 /* ResponseError.swift in Sources */,
+				B1C9BDAE283F92C400232047 /* Observable.swift in Sources */,
+				B1C9BD7B283F929600232047 /* ListViewModel.swift in Sources */,
+				B1C9BD6D283F91E700232047 /* SearchUseCaseTests.swift in Sources */,
+				B1C9BD90283F92AB00232047 /* DefaultRepository.swift in Sources */,
+				B1C9BDA2283F92BC00232047 /* DailyRequestDTO+Mapping.swift in Sources */,
+				B1C9BD87283F92A300232047 /* SearchUseCase.swift in Sources */,
+				B1C9BD75283F929000232047 /* ListViewController.swift in Sources */,
+				B1C9BD79283F929600232047 /* ListViewModelActions.swift in Sources */,
+				B1C9BD74283F929000232047 /* ListItemCell.swift in Sources */,
+				B1C9BDA9283F92C000232047 /* Config.swift in Sources */,
+				B1C9BD8B283F92A700232047 /* WeatherForecastItem.swift in Sources */,
+				B1C9BD94283F92B100232047 /* CoreDataStorage.swift in Sources */,
+				B1C9BD9D283F92B900232047 /* API.swift in Sources */,
+				B1C9BD83283F92A100232047 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

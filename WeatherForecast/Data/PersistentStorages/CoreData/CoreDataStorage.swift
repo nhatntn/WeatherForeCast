@@ -15,7 +15,6 @@ enum CoreDataStorageError: Error {
 }
 
 final class CoreDataStorage {
-
     static let shared = CoreDataStorage()
     
     private init() {}
@@ -31,7 +30,6 @@ final class CoreDataStorage {
         return container
     }()
 
-    // MARK: - Core Data Saving support
     func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {

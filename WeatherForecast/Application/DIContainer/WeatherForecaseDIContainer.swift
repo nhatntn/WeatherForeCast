@@ -15,7 +15,6 @@ final class WeatherForecaseDIContainer {
     private let dependencies: Dependencies
     
     // MARK: - Persistent Storage
-    lazy var queriesStorage: QueriesStorage = CoreDataQueriesStorage(maxStorageLimit: 10)
     lazy var responseCache: ResponseStorage = CoreDataResponseStorage()
     
     init(dependencies: Dependencies) {
@@ -24,19 +23,13 @@ final class WeatherForecaseDIContainer {
     
     // MARK: - Use Cases
     func makeSearchUseCase() -> SearchUseCase {
-        return DefaultSearchUseCase(repository: makeRepository(),
-                                    queriesRepository: makeQueriesRepository())
+        return DefaultSearchUseCase(repository: makeRepository())
     }
     
     // MARK: - Repositories
     func makeRepository() -> Repository {
         return DefaultRepository(networkService: dependencies.networkService,
                                  cache: responseCache)
-    }
-    
-    func makeQueriesRepository() -> QueriesRepository {
-        return DefaultQueriesRepository(networkService: dependencies.networkService,
-                                        persistentStorage: queriesStorage)
     }
     
     // MARK: - Flow Coordinators

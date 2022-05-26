@@ -22,16 +22,15 @@ extension DefaultRepository: Repository {
                           completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable?{
         let requestDTO = DailyRequestDTO(q: query, cnt: 7, units: "metric")
         
-        let task = RepositoryTask()
+        var task: NetworkCancellable?
         let endpoint = APIEndpoints.getDailyWeatherForecast(with: requestDTO)
         
         cache.getResponse(for: requestDTO) { (result) in
             if case let .success(responseDTO?) = result {
                 cached(responseDTO)
             }
-            guard !task.isCancelled else { return }
             
-            task.networkTask = self.networkService.request(with: endpoint) { result in
+            task = self.networkService.request(with: endpoint) { result in
                 switch result {
                 case .success:
                     let result = result.flatMap { (response) -> Result<WeatherForecastData, NetworkError> in
@@ -57,16 +56,7 @@ extension DefaultRepository: Repository {
                 }
             }
         }
+        
         return task
-    }
-}
-
-class RepositoryTask: NetworkCancellable {
-    var networkTask: NetworkCancellable?
-    var isCancelled: Bool = false
-    
-    func cancel() {
-        networkTask?.cancel()
-        isCancelled = true
     }
 }

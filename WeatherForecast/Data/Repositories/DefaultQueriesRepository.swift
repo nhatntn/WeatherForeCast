@@ -18,14 +18,3 @@ final class DefaultQueriesRepository {
         self.queriesPersistentStorage = persistentStorage
     }
 }
-
-extension DefaultQueriesRepository: QueriesRepository {
-    
-    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[String], NetworkError>) -> Void) {
-        
-    }
-    
-    func saveRecentQuery(query: String, completion: @escaping (Result<String, NetworkError>) -> Void) {
-        
-    }
-}
