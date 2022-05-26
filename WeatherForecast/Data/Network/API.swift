@@ -13,4 +13,10 @@ struct APIEndpoints {
                         method: .get,
                         queryParametersEncodable: query)
     }
+    
+    static func getIcon(with iconPath: String) -> Endpoint<DailyResponseDTO> {
+        return Endpoint(path: iconPath,
+                        method: .get,
+                        responseDecoder: RawDataResponseDecoder())
+    }
 }

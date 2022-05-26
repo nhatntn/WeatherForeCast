@@ -10,6 +10,7 @@ import UIKit
 final class WeatherForecaseDIContainer {
     struct Dependencies {
         let networkService: Networkable
+        let iconNetworkService: Networkable
     }
     
     private let dependencies: Dependencies
@@ -32,6 +33,10 @@ final class WeatherForecaseDIContainer {
                                  cache: responseCache)
     }
     
+    func makeIconRepository() -> IconRepository? {
+        return DefaultIconRepository(networkService: dependencies.iconNetworkService)
+    }
+    
     // MARK: - Flow Coordinators
     func makeSearchFlowCoordinator(navigationController: UINavigationController) -> SearchFlowCoordinator {
         return SearchFlowCoordinator(navigationController: navigationController,
@@ -39,13 +44,15 @@ final class WeatherForecaseDIContainer {
     }
     
     func makeListViewModel() -> ListViewModel {
-        return DefaultListViewModel(searchUseCase: makeSearchUseCase())
+        return DefaultListViewModel(searchUseCase: makeSearchUseCase(),
+                                    iconRepository: makeIconRepository())
     }
 }
 
 
 extension WeatherForecaseDIContainer: SearchFlowCoordinatorDependencies {
     func makeListViewController() -> ListViewController {
-        return ListViewController.create(with: makeListViewModel())
+        return ListViewController.create(with: makeListViewModel(),
+                                         iconRepository: makeIconRepository())
     }
 }

@@ -14,6 +14,7 @@ class ListViewController: UIViewController {
     
     private var viewModel: ListViewModel!
     private var searchController = UISearchController(searchResultsController: nil)
+    private var iconRepository: IconRepository?
     
     static func instantiateViewController(_ bundle: Bundle? = nil) -> ListViewController {
         let fileName = NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""
@@ -27,8 +28,9 @@ class ListViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-    static func create(with viewModel: ListViewModel) -> ListViewController {
+    static func create(with viewModel: ListViewModel, iconRepository: IconRepository?) -> ListViewController {
         let view = ListViewController.instantiateViewController()
+        view.iconRepository = iconRepository
         view.viewModel = viewModel
         return view
     }
@@ -106,7 +108,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.fill(with: viewModel.items.value[indexPath.row])
+        cell.fill(with: viewModel.items.value[indexPath.row], iconRepository: iconRepository)
         return cell
     }
 

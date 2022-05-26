@@ -18,9 +18,15 @@ final class AppDIContainer {
         return NetworkService(config: config)
     }()
     
+    lazy var iconNetworkService: Networkable = {
+        let config = ApiDataNetworkConfig(baseURL: URL(string: appConfiguration.iconBaseURL)!)
+        return NetworkService(config: config)
+    }()
+    
     // MARK: - DIContainers of scenes
     func makeWeatherForecaseDIContainer() -> WeatherForecaseDIContainer {
-        let dependencies = WeatherForecaseDIContainer.Dependencies(networkService: networkService)
+        let dependencies = WeatherForecaseDIContainer.Dependencies(networkService: networkService,
+                                                                   iconNetworkService: iconNetworkService)
         return WeatherForecaseDIContainer(dependencies: dependencies)
     }
 }

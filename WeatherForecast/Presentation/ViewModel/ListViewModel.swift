@@ -15,6 +15,7 @@ protocol ListViewModelOutput {
     var items: Observable<[ListItemViewModel]> { get }
     var query: Observable<String> { get }
     var error: Observable<String> { get }
+    var icon: Observable<Data?> { get }
     var screenTitle: String { get }
     var searchBarPlaceholder: String { get }
 }
@@ -23,17 +24,21 @@ protocol ListViewModel: ListViewModelInput, ListViewModelOutput {}
 
 final class DefaultListViewModel: ListViewModel {
     private let searchUseCase: SearchUseCase
+    private let iconRepository: IconRepository?
+    private var iconLoadTask: NetworkCancellable? { willSet { iconLoadTask?.cancel() } }
     
     // MARK: - OUTPUT
     let items: Observable<[ListItemViewModel]> = Observable([])
     let query: Observable<String> = Observable("")
     let error: Observable<String> = Observable("")
+    let icon: Observable<Data?> = Observable(nil)
     let screenTitle = NSLocalizedString("Weather Forecast", comment: "")
     let searchBarPlaceholder = NSLocalizedString("Search", comment: "")
     
     // MARK: - Init
-    init(searchUseCase: SearchUseCase) {
+    init(searchUseCase: SearchUseCase, iconRepository: IconRepository? = nil) {
         self.searchUseCase = searchUseCase
+        self.iconRepository = iconRepository
     }
     
     // MARK: - Private
@@ -66,7 +71,8 @@ final class DefaultListViewModel: ListViewModel {
                                      averageTempLabel: "\(averageTemp)",
                                      pressureLabel: "\($0.pressure)",
                                      humidityLabel: "\($0.humidity)",
-                                     descriptionLabel: description)
+                                     descriptionLabel: description,
+                                     icon: $0.weatherItems.first?.icon ?? "")
         }
     }
     
@@ -75,6 +81,8 @@ final class DefaultListViewModel: ListViewModel {
         switch error {
         case .notConnected:
             self.error.value = "No internet connection"
+        case .invalidInput:
+            self.error.value = "Search information must have at least 3 characters"
         case .invalidJSON, .invalidURL:
             self.error.value = "Something went wrong. Check your input again!"
         case .error(_, data: nil):
@@ -88,7 +96,8 @@ final class DefaultListViewModel: ListViewModel {
 // MARK: - INPUT. View event methods
 extension DefaultListViewModel {
     func didSearch(query: String) {
-        guard !query.isEmpty else {
+        guard query.count >= 3 else {
+            self.handle(error: .invalidInput)
             return
         }
         self.query(with: query)

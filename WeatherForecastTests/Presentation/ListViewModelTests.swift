@@ -41,13 +41,26 @@ class ListViewModelTests: XCTestCase {
     func test_whenSearchWithEmptyString_thenViewModelRejectAcion() {
         // given
         let searchUseCaseMock = SearchUseCaseMock()
-        searchUseCaseMock.error = NetworkError.error(statusCode: 200, data: nil) //Fake error
+        searchUseCaseMock.error = NetworkError.invalidInput
         let viewModel = DefaultListViewModel(searchUseCase: searchUseCaseMock)
         
         // when
         viewModel.didSearch(query: "")
         
         // then
-        XCTAssertTrue(viewModel.error.value.isEmpty)
+        XCTAssertFalse(viewModel.error.value.isEmpty)
+    }
+    
+    func test_whenSearchWithInvalidString_thenViewModelRejectAcion() {
+        // given
+        let searchUseCaseMock = SearchUseCaseMock()
+        searchUseCaseMock.error = NetworkError.invalidInput
+        let viewModel = DefaultListViewModel(searchUseCase: searchUseCaseMock)
+        
+        // when
+        viewModel.didSearch(query: "1")
+        
+        // then
+        XCTAssertFalse(viewModel.error.value.isEmpty)
     }
 }

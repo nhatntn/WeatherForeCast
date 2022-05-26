@@ -13,6 +13,8 @@ public enum NetworkError: Error {
     case cancelled
     case invalidURL
     case invalidJSON
+    case invalidInput
+    case generic(error: Error)
 }
 
 public protocol NetworkCancellable {

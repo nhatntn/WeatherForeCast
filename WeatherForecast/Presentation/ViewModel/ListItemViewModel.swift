@@ -13,4 +13,5 @@ struct ListItemViewModel {
     let pressureLabel: String?
     let humidityLabel: String?
     let descriptionLabel: String?
+    let icon: String?
 }
