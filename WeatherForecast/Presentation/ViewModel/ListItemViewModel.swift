@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct ListItemViewModel: Equatable {
-
+struct ListItemViewModel {
+    let dateLabel: String?
+    let averageTempLabel: String?
+    let pressureLabel: String?
+    let humidityLabel: String?
+    let descriptionLabel: String?
 }

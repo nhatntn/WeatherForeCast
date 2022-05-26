@@ -22,7 +22,7 @@ final class CoreDataStorage {
 
     // MARK: - Core Data stack
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "CoreDataStorage")
+        let container = NSPersistentContainer(name: "WeatherForecast")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 assertionFailure("CoreDataStorage Unresolved error \(error), \(error.userInfo)")
@@ -38,7 +38,6 @@ final class CoreDataStorage {
             do {
                 try context.save()
             } catch {
-                // TODO: - Log to Crashlytics
                 assertionFailure("CoreDataStorage Unresolved error \(error), \((error as NSError).userInfo)")
             }
         }

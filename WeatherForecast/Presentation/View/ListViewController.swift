@@ -10,6 +10,7 @@ import UIKit
 
 class ListViewController: UIViewController {
     @IBOutlet weak var searchBarContainer: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: ListViewModel!
     private var searchController = UISearchController(searchResultsController: nil)
@@ -40,12 +41,22 @@ class ListViewController: UIViewController {
     
     private func bind(to viewModel: ListViewModel) {
         viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
+        viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
     }
     
     // MARK: - Private
     func setupViews() {
         title = viewModel.screenTitle
         setupSearchController()
+    }
+    
+    private func setupTableViews() {
+        tableView.estimatedRowHeight = ListItemCell.height
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    private func updateItems() {
+        tableView.reloadData()
     }
     
     private func showError(_ error: String) {
@@ -77,22 +88,26 @@ extension ListViewController: UISearchBarDelegate {
         searchController.isActive = false
         viewModel.didSearch(query: searchText)
     }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.didCancelSearch()
-    }
 }
 
-extension ListViewController: UISearchControllerDelegate {
-    public func willPresentSearchController(_ searchController: UISearchController) {
-        
+extension ListViewController: UISearchControllerDelegate {}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.items.value.count
     }
 
-    public func willDismissSearchController(_ searchController: UISearchController) {
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListItemCell.reuseIdentifier,
+                                                       for: indexPath) as? ListItemCell else {
+            assertionFailure("Cannot dequeue reusable cell \(ListItemCell.self) with reuseIdentifier: \(ListItemCell.reuseIdentifier)")
+            return UITableViewCell()
+        }
+
+        cell.fill(with: viewModel.items.value[indexPath.row])
+        return cell
     }
 
-    public func didDismissSearchController(_ searchController: UISearchController) {
-    
-    }
 }

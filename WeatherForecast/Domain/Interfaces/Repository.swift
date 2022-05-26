@@ -9,6 +9,6 @@ import Foundation
 
 protocol Repository {
     @discardableResult
-    func fetchList(query: String, cached: @escaping (String) -> Void,
+    func fetchList(query: String, cached: @escaping ([WeatherForecastItem]) -> Void,
                    completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable?
 }

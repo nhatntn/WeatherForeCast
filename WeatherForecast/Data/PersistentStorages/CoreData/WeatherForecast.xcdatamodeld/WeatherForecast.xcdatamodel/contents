@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20G527" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DailyRequestEntity" representedClassName="DailyRequestEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="query" optional="YES" attributeType="String"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyResponseEntity" inverseName="request" inverseEntity="DailyResponseEntity"/>
+    </entity>
+    <entity name="DailyResponseEntity" representedClassName="DailyResponseEntity" syncable="YES" codeGenerationType="class">
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WeatherForecastEntity" inverseName="itemsResponse" inverseEntity="WeatherForecastEntity"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyRequestEntity" inverseName="response" inverseEntity="DailyRequestEntity"/>
+    </entity>
+    <entity name="TemperatureEntity" representedClassName="TemperatureEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="day" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="min" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherForecastEntity" inverseName="temperature" inverseEntity="WeatherForecastEntity"/>
+    </entity>
+    <entity name="WeatherEntity" representedClassName="WeatherEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="detail" optional="YES" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="main" optional="YES" attributeType="String"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherForecastEntity" inverseName="weathers" inverseEntity="WeatherForecastEntity"/>
+    </entity>
+    <entity name="WeatherForecastEntity" representedClassName="WeatherForecastEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="dateInterval" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="itemsResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyResponseEntity" inverseName="items" inverseEntity="DailyResponseEntity"/>
+        <relationship name="temperature" maxCount="1" deletionRule="Deny" destinationEntity="TemperatureEntity" inverseName="relationship" inverseEntity="TemperatureEntity"/>
+        <relationship name="weathers" toMany="YES" deletionRule="Deny" destinationEntity="WeatherEntity" inverseName="relationship" inverseEntity="WeatherEntity"/>
+    </entity>
+    <elements>
+        <element name="DailyRequestEntity" positionX="-1033.872253417969" positionY="-66.49217224121094" width="128" height="73"/>
+        <element name="DailyResponseEntity" positionX="-805.0459594726562" positionY="-93.95941162109369" width="128" height="73"/>
+        <element name="TemperatureEntity" positionX="-585.6658935546875" positionY="169.8828430175781" width="128" height="103"/>
+        <element name="WeatherEntity" positionX="-864.2667846679688" positionY="42.41040039062494" width="128" height="118"/>
+        <element name="WeatherForecastEntity" positionX="-572.9405517578125" positionY="-79.873046875" width="128" height="133"/>
+    </elements>
+</model>

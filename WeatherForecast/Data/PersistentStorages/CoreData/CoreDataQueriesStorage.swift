@@ -20,12 +20,11 @@ final class CoreDataQueriesStorage {
 }
 
 extension CoreDataQueriesStorage: QueriesStorage {
-    
-    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[String], Error>) -> Void) {
+    func fetchRecentsQueries(maxCount: Int, completion: @escaping (Result<[WeatherForecastData], Error>) -> Void) {
         
     }
     
-    func saveRecentQuery(query: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func saveRecentQuery(query: String, completion: @escaping (Result<WeatherForecastData, Error>) -> Void) {
 
     }
 }

@@ -9,7 +9,6 @@ import Foundation
 
 protocol ListViewModelInput {
     func didSearch(query: String)
-    func didCancelSearch()
     func showQueriesSuggestions()
     func closeQueriesSuggestions()
 }
@@ -18,7 +17,6 @@ protocol ListViewModelOutput {
     var items: Observable<[ListItemViewModel]> { get }
     var query: Observable<String> { get }
     var error: Observable<String> { get }
-    var isEmpty: Bool { get }
     var screenTitle: String { get }
     var searchBarPlaceholder: String { get }
 }
@@ -29,18 +27,14 @@ final class DefaultListViewModel: ListViewModel {
     private let searchUseCase: SearchUseCase
     private let actions: ListViewModelActions?
     
-    private var loadTask: NetworkCancellable? { willSet { loadTask?.cancel() } }
-    
     // MARK: - OUTPUT
     let items: Observable<[ListItemViewModel]> = Observable([])
     let query: Observable<String> = Observable("")
     let error: Observable<String> = Observable("")
-    var isEmpty: Bool { return items.value.isEmpty }
     let screenTitle = NSLocalizedString("Weather Forecast", comment: "")
     let searchBarPlaceholder = NSLocalizedString("Search", comment: "")
     
     // MARK: - Init
-
     init(searchUseCase: SearchUseCase,
          actions: ListViewModelActions? = nil) {
         self.searchUseCase = searchUseCase
@@ -50,19 +44,39 @@ final class DefaultListViewModel: ListViewModel {
     // MARK: - Private
     private func query(with string: String) {
         query.value = string
-        loadTask = searchUseCase.execute(requestValue: string, cached: { (items) in
-            
+        _ = searchUseCase.execute(requestValue: string, cached: { (items) in
+            self.load(with: items)
         }, completion: { (result) in
             switch result {
-            case .success(let items):
-                break
+            case .success(let data):
+                self.load(with: data.listItems)
             case .failure(let error):
                 self.handle(error: error)
             }
         })
     }
     
+    private func load(with items: [WeatherForecastItem]) {
+        self.items.value = items.map {
+            let timeStr = DateFormatterHelper.stringForDateInterval(
+                timeIntervalSince1970: $0.dateInterval,
+                format: "EEE, dd MMM yyyy",
+                timeIntervalType: .seconds
+            )
+            
+            let averageTemp = Int((($0.temperature.max + $0.temperature.min) / 2.0).rounded(.toNearestOrEven))
+            let description = $0.weatherItems.compactMap({ $0.description }).joined(separator: ", ")
+            
+            return ListItemViewModel(dateLabel: timeStr,
+                                     averageTempLabel: "\(averageTemp)",
+                                     pressureLabel: "\($0.pressure)",
+                                     humidityLabel: "\($0.humidity)",
+                                     descriptionLabel: description)
+        }
+    }
+    
     private func handle(error: NetworkError) {
+        self.items.value.removeAll()
         switch error {
         case .notConnected:
             self.error.value = "No internet connection"
@@ -79,18 +93,43 @@ final class DefaultListViewModel: ListViewModel {
 // MARK: - INPUT. View event methods
 extension DefaultListViewModel {
     func didSearch(query: String) {
-        
+        guard !query.isEmpty else {
+            return
+        }
+        self.query(with: query)
     }
-
-    func didCancelSearch() {
-        
-    }
-
+    
     func showQueriesSuggestions() {
         
     }
-
+    
     func closeQueriesSuggestions() {
         
+    }
+}
+
+public enum TimeIntervalType {
+    case seconds
+    case milisecond
+}
+
+public enum DateFormatterHelper {
+    public static func stringForDateInterval(
+        timeIntervalSince1970: TimeInterval,
+        format: String,
+        timeIntervalType: TimeIntervalType = .milisecond
+    ) -> String {
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = format
+        
+        let time: TimeInterval
+        switch timeIntervalType {
+        case .milisecond:
+            time = timeIntervalSince1970 / 1_000
+        case .seconds:
+            time = timeIntervalSince1970
+        }
+        
+        return dateFormater.string(from: Date(timeIntervalSince1970: time))
     }
 }

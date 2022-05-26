@@ -9,7 +9,7 @@ import Foundation
 
 protocol SearchUseCase {
     func execute(requestValue: String,
-                 cached: @escaping (String) -> Void,
+                 cached: @escaping ([WeatherForecastItem]) -> Void,
                  completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable?
 }
 
@@ -24,18 +24,14 @@ final class DefaultSearchUseCase: SearchUseCase {
         self.queriesRepository = queriesRepository
     }
     
-    
-    func execute(requestValue: String, cached: @escaping (String) -> Void, completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable? {
-        return self.repository.fetchList(query: requestValue) { (_) in
-            
-        } completion: { result in
+    func execute(requestValue: String, cached: @escaping ([WeatherForecastItem]) -> Void, completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable? {
+        return self.repository.fetchList(query: requestValue, cached: cached) { result in
             if case .success = result {
                 self.queriesRepository.saveRecentQuery(query: requestValue) { _ in }
             }
 
             completion(result)
         }
-
     }
     
     
