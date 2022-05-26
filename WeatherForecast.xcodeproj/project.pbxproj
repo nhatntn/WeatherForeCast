@@ -63,6 +63,8 @@
 		B1C9BDC3283F98E100232047 /* WeatherForecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BD3A283F5EEF00232047 /* WeatherForecast.xcdatamodeld */; };
 		B1C9BDC8283FBFCD00232047 /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BDC7283FBFCD00232047 /* NetworkServiceMock.swift */; };
 		B1C9BDDA283FC7A600232047 /* RepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BDD9283FC7A600232047 /* RepositoryMock.swift */; };
+		B1C9BDE5283FD14100232047 /* ListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BDE4283FD14100232047 /* ListViewModelTests.swift */; };
+		B1C9BDEB283FD17100232047 /* SearchUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9BDEA283FD17100232047 /* SearchUseCaseMock.swift */; };
 		B1E78E8B28390C18001018FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78E8A28390C18001018FE /* AppDelegate.swift */; };
 		B1E78E8F28390C18001018FE /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78E8E28390C18001018FE /* ListViewController.swift */; };
 		B1E78E9228390C18001018FE /* ListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1E78E9028390C18001018FE /* ListViewController.storyboard */; };
@@ -122,6 +124,8 @@
 		B1C9BDB6283F97A000232047 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		B1C9BDC7283FBFCD00232047 /* NetworkServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMock.swift; sourceTree = "<group>"; };
 		B1C9BDD9283FC7A600232047 /* RepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryMock.swift; sourceTree = "<group>"; };
+		B1C9BDE4283FD14100232047 /* ListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModelTests.swift; sourceTree = "<group>"; };
+		B1C9BDEA283FD17100232047 /* SearchUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCaseMock.swift; sourceTree = "<group>"; };
 		B1E78E8728390C18001018FE /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1E78E8A28390C18001018FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1E78E8E28390C18001018FE /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 		B1C9BDD6283FC75800232047 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B1C9BDE9283FD16300232047 /* Mock */,
+				B1C9BDE4283FD14100232047 /* ListViewModelTests.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -317,6 +323,14 @@
 			isa = PBXGroup;
 			children = (
 				B1C9BDD9283FC7A600232047 /* RepositoryMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		B1C9BDE9283FD16300232047 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				B1C9BDEA283FD17100232047 /* SearchUseCaseMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -615,6 +629,7 @@
 			files = (
 				B1C9BDA8283F92C000232047 /* NetworkService.swift in Sources */,
 				B1C9BDC8283FBFCD00232047 /* NetworkServiceMock.swift in Sources */,
+				B1C9BDE5283FD14100232047 /* ListViewModelTests.swift in Sources */,
 				B1C9BD7F283F929D00232047 /* SearchFlowCoordinator.swift in Sources */,
 				B1C9BDDA283FC7A600232047 /* RepositoryMock.swift in Sources */,
 				B1C9BD8C283F92A700232047 /* WeatherForecastData.swift in Sources */,
@@ -639,6 +654,7 @@
 				B1C9BD75283F929000232047 /* ListViewController.swift in Sources */,
 				B1C9BD74283F929000232047 /* ListItemCell.swift in Sources */,
 				B1C9BDA9283F92C000232047 /* Config.swift in Sources */,
+				B1C9BDEB283FD17100232047 /* SearchUseCaseMock.swift in Sources */,
 				B1C9BD8B283F92A700232047 /* WeatherForecastItem.swift in Sources */,
 				B1C9BD94283F92B100232047 /* CoreDataStorage.swift in Sources */,
 				B1C9BD9D283F92B900232047 /* API.swift in Sources */,

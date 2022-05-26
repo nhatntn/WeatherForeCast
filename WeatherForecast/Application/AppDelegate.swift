@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appFlowCoordinator?.start()
         window?.makeKeyAndVisible()
     
-        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory,
+        print("ApplicationSupportDirectory: ", FileManager.default.urls(for: .applicationSupportDirectory,
                                                                 in: .userDomainMask).last ?? "Not Found!")
 
         return true
