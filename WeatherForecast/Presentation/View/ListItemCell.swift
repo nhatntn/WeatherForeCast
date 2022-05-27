@@ -23,9 +23,8 @@ final class ListItemCell: UITableViewCell {
     private var iconRepository: IconRepository?
     private var imageLoadTask: NetworkCancellable? { willSet { imageLoadTask?.cancel() } }
     
-    func fill(with viewModel: ListItemViewModel, iconRepository: IconRepository?) {
-        self.viewModel = viewModel
-        self.iconRepository = iconRepository
+    override func awakeFromNib() {
+        super.awakeFromNib()
         
         let customFont = UIFont.preferredFont(forTextStyle: .body)
         [dateLabel, averageTempLabel, pressureLabel, humidityLabel, descriptionLabel].forEach { label in
@@ -34,6 +33,11 @@ final class ListItemCell: UITableViewCell {
             label?.adjustsFontForContentSizeCategory = true
             label?.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: customFont)
         }
+    }
+    
+    func fill(with viewModel: ListItemViewModel, iconRepository: IconRepository?) {
+        self.viewModel = viewModel
+        self.iconRepository = iconRepository
         
         dateLabel.text = "Date: \(viewModel.dateLabel ?? "")"
         averageTempLabel.text = "Avarage Temperature: \(viewModel.averageTempLabel ?? "")°C"

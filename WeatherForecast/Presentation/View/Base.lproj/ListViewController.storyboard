@@ -36,7 +36,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wcA-Dj-BKR">
                                                     <rect key="frame" x="8" y="8" width="398" height="152"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="SzT-EW-ykC">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SzT-EW-ykC">
                                                             <rect key="frame" x="0.0" y="0.0" width="348" height="152"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOT-wi-2Pp">
@@ -73,6 +73,14 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="2Yd-3N-ZLW" firstAttribute="top" secondItem="ade-I8-G5P" secondAttribute="bottom" id="2ry-35-ENy"/>
+                                                                <constraint firstItem="ade-I8-G5P" firstAttribute="top" secondItem="KOT-wi-2Pp" secondAttribute="bottom" id="a5y-zs-FrK"/>
+                                                                <constraint firstItem="Tj6-oO-OSv" firstAttribute="top" secondItem="q6q-dm-lws" secondAttribute="bottom" id="hKt-VP-Gls"/>
+                                                                <constraint firstItem="q6q-dm-lws" firstAttribute="top" secondItem="2Yd-3N-ZLW" secondAttribute="bottom" id="kGJ-nF-nfm"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Tj6-oO-OSv" secondAttribute="bottom" id="rB5-kB-dpU"/>
+                                                                <constraint firstItem="KOT-wi-2Pp" firstAttribute="top" secondItem="SzT-EW-ykC" secondAttribute="top" id="rDG-me-Y4f"/>
+                                                            </constraints>
                                                         </stackView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YCZ-wT-vtm">
                                                             <rect key="frame" x="348" y="51" width="50" height="50"/>
