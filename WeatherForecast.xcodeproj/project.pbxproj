@@ -74,6 +74,7 @@
 		B1E78EA228390C1B001018FE /* WeatherForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78EA128390C1B001018FE /* WeatherForecastTests.swift */; };
 		B1E78EAD28390C1B001018FE /* WeatherForecastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78EAC28390C1B001018FE /* WeatherForecastUITests.swift */; };
 		B1E78EE32839127A001018FE /* AppConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E78EE22839127A001018FE /* AppConfigurations.swift */; };
+		B953E732284687CE0045F00C /* CoreDataResponseStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B953E731284687CE0045F00C /* CoreDataResponseStorageTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		B1E78EAC28390C1B001018FE /* WeatherForecastUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastUITests.swift; sourceTree = "<group>"; };
 		B1E78EAE28390C1B001018FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1E78EE22839127A001018FE /* AppConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurations.swift; sourceTree = "<group>"; };
+		B953E731284687CE0045F00C /* CoreDataResponseStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataResponseStorageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +377,7 @@
 		B1E78EA028390C1B001018FE /* WeatherForecastTests */ = {
 			isa = PBXGroup;
 			children = (
+				B953E72F284687B80045F00C /* Data */,
 				B1C9BD6B283F91BC00232047 /* Domain */,
 				B1C9BDD6283FC75800232047 /* Presentation */,
 				B1C9BDB5283F977700232047 /* Infrastructure */,
@@ -461,6 +464,22 @@
 				B1C9BD1C283EAC8B00232047 /* ResponseError.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B953E72F284687B80045F00C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B953E730284687C10045F00C /* CoreData */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B953E730284687C10045F00C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B953E731284687CE0045F00C /* CoreDataResponseStorageTests.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -631,6 +650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B953E732284687CE0045F00C /* CoreDataResponseStorageTests.swift in Sources */,
 				B1C9BDA8283F92C000232047 /* NetworkService.swift in Sources */,
 				B1C9BDC8283FBFCD00232047 /* NetworkServiceMock.swift in Sources */,
 				B1C9BDE5283FD14100232047 /* ListViewModelTests.swift in Sources */,

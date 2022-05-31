@@ -11,7 +11,7 @@ class ListViewModelTests: XCTestCase {
     func test_whenSearchUseCaseReturnsError_thenViewModelReturnError() {
         // given
         let searchUseCaseMock = SearchUseCaseMock()
-        searchUseCaseMock.error = NetworkError.error(statusCode: 200, data: nil)
+        searchUseCaseMock.error = .noResponse
         let viewModel = DefaultListViewModel(searchUseCase: searchUseCaseMock)
         
         // when
@@ -41,7 +41,7 @@ class ListViewModelTests: XCTestCase {
     func test_whenSearchWithEmptyString_thenViewModelRejectAcion() {
         // given
         let searchUseCaseMock = SearchUseCaseMock()
-        searchUseCaseMock.error = NetworkError.invalidInput
+        searchUseCaseMock.error = .invalidInput
         let viewModel = DefaultListViewModel(searchUseCase: searchUseCaseMock)
         
         // when
@@ -54,7 +54,7 @@ class ListViewModelTests: XCTestCase {
     func test_whenSearchWithInvalidString_thenViewModelRejectAcion() {
         // given
         let searchUseCaseMock = SearchUseCaseMock()
-        searchUseCaseMock.error = NetworkError.invalidInput
+        searchUseCaseMock.error = .invalidInput
         let viewModel = DefaultListViewModel(searchUseCase: searchUseCaseMock)
         
         // when

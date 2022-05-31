@@ -8,10 +8,10 @@
 import Foundation
 
 class SearchUseCaseMock: SearchUseCase {
-    var error: NetworkError?
+    var error: DataRepositoryError?
     var data: WeatherForecastData?
     
-    func execute(requestValue: String, cached: @escaping ([WeatherForecastItem]) -> Void, completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable? {
+    func execute(requestValue: String, cached: @escaping ([WeatherForecastItem]) -> Void, completion: @escaping (Result<WeatherForecastData, DataRepositoryError>) -> Void) -> NetworkCancellable? {
         if let error = error {
             completion(.failure(error))
         } else if let data = data {

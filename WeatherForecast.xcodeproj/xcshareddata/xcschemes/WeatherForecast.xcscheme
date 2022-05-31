@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,16 +36,6 @@
                BlueprintIdentifier = "B1E78E9C28390C1B001018FE"
                BuildableName = "WeatherForecastTests.xctest"
                BlueprintName = "WeatherForecastTests"
-               ReferencedContainer = "container:WeatherForecast.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1E78EA728390C1B001018FE"
-               BuildableName = "WeatherForecastUITests.xctest"
-               BlueprintName = "WeatherForecastUITests"
                ReferencedContainer = "container:WeatherForecast.xcodeproj">
             </BuildableReference>
          </TestableReference>

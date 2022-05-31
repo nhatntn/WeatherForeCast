@@ -38,15 +38,6 @@ class WeatherForecastItem: Codable {
         self.weatherItems = try parentContainer.decode([Weather].self, forKey: .weather)
         self.temperature = try parentContainer.decode(Temperature.self, forKey: .temperature)
     }
-        
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: WeatherForecastItemKeys.self)
-        try container.encode(self.dateInterval, forKey: .dateInterval)
-        try container.encode(self.pressure, forKey: .pressure)
-        try container.encode(self.humidity, forKey: .humidity)
-        try container.encode(self.weatherItems, forKey: .weather)
-        try container.encode(self.temperature, forKey: .temperature)
-      }
 
 }
 

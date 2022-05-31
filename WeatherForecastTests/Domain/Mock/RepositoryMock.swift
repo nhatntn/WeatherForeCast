@@ -8,10 +8,10 @@
 import Foundation
 
 struct RepositoryMock: Repository {
-    var result: Result<WeatherForecastData, NetworkError>
+    var result: Result<WeatherForecastData, DataRepositoryError>
     
     func fetchList(query: String, cached: @escaping ([WeatherForecastItem]) -> Void,
-                   completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable? {
+                   completion: @escaping (Result<WeatherForecastData, DataRepositoryError>) -> Void) -> NetworkCancellable? {
         //Mock cached
         let data = try? result.get()
         let items = data?.listItems ?? []
