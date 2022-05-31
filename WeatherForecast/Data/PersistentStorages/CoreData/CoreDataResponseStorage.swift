@@ -46,7 +46,7 @@ extension CoreDataResponseStorage: ResponseStorage {
                 
                 completion(.success(requestEntity?.response?.toData()))
             } catch {
-                completion(.failure(CoreDataStorageError.readError(error)))
+                completion(.failure(.readError(error)))
             }
         }
     }
@@ -61,7 +61,7 @@ extension CoreDataResponseStorage: ResponseStorage {
 
                 try context.save()
             } catch {
-                debugPrint("CoreDataMoviesResponseStorage Unresolved error \(error), \((error as NSError).userInfo)")
+                debugPrint("CoreDataResponseStorage Unresolved error \(error), \((error as NSError).userInfo)")
             }
         }
     }

@@ -17,46 +17,60 @@ final class DefaultRepository {
     }
 }
 
+public enum DataRepositoryError: Error {
+    case noResponse
+    case parsing(Error)
+    case networkFailure(NetworkError)
+    case invalidInput
+}
+
 extension DefaultRepository: Repository {
     public func fetchList(query: String, cached: @escaping ([WeatherForecastItem]) -> Void,
-                          completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable?{
-        let requestDTO = DailyRequestDTO(q: query, cnt: 7, units: "metric")
+                          completion: @escaping (Result<WeatherForecastData, DataRepositoryError>) -> Void) -> NetworkCancellable? {
+        if query.count < 3 {
+            completion(.failure(.invalidInput))
+            return nil
+        }
         
+        let requestDTO = DailyRequestDTO(q: query, cnt: 7, units: "metric")
         var task: NetworkCancellable?
         let endpoint = APIEndpoints.getDailyWeatherForecast(with: requestDTO)
         
         cache.getResponse(for: requestDTO) { (result) in
             if case let .success(responseDTO?) = result {
                 cached(responseDTO)
+                return
             }
             
             task = self.networkService.request(with: endpoint) { result in
                 switch result {
-                case .success:
-                    let result = result.flatMap { (response) -> Result<WeatherForecastData, NetworkError> in
-                        do {
-                            guard let response = response else {
-                                return .failure(.notConnected)
-                            }
-                            let result = try JSONDecoder().decode(DailyResponseDTO.self, from: response)
-                            
-                            guard let data = result.data else {
-                                return .failure(.error(statusCode: result.error?.errorCode ?? -999, data: nil))
-                            }
-                            
-                            self.cache.save(response: result, for: requestDTO)
-                            return .success(data)
-                        } catch {
-                            return .failure(.invalidJSON)
-                        }
-                    }
-                    completion(result)
+                case .success(let data):
+                    let result: Result<WeatherForecastData, DataRepositoryError> = self.decode(response: data, of: requestDTO)
+                    DispatchQueue.main.async { return completion(result) }
                 case .failure(let error):
-                    completion(.failure(error))
+                    let dataError: DataRepositoryError = .networkFailure(error)
+                    completion(.failure(dataError))
                 }
             }
         }
         
         return task
+    }
+    
+    // MARK: - Private
+    private func decode(response data: Data?, of requestDTO: DailyRequestDTO) -> Result<WeatherForecastData, DataRepositoryError> {
+        do {
+            guard let data = data else { return .failure(.noResponse) }
+            let result = try JSONDecoder().decode(DailyResponseDTO.self, from: data)
+            self.cache.save(response: result, for: requestDTO)
+            
+            guard let response = result.data else {
+                return .failure(.noResponse)
+            }
+            return .success(response)
+        } catch {
+
+            return .failure(.parsing(error))
+        }
     }
 }

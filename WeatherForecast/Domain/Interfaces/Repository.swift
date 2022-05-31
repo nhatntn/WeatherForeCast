@@ -9,7 +9,7 @@ import Foundation
 
 protocol Repository {
     func fetchList(query: String, cached: @escaping ([WeatherForecastItem]) -> Void,
-                   completion: @escaping (Result<WeatherForecastData, NetworkError>) -> Void) -> NetworkCancellable?
+                   completion: @escaping (Result<WeatherForecastData, DataRepositoryError>) -> Void) -> NetworkCancellable?
 }
 
 protocol IconRepository {

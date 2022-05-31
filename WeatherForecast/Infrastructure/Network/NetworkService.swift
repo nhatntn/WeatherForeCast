@@ -12,9 +12,7 @@ public enum NetworkError: Error {
     case notConnected
     case cancelled
     case invalidURL
-    case invalidJSON
-    case invalidInput
-    case generic(error: Error)
+    case generic(Error)
 }
 
 public protocol NetworkCancellable {
@@ -41,15 +39,6 @@ public final class NetworkService: Networkable {
         self.config = config
     }
     
-    private func resolve(error: Error) -> NetworkError {
-        let code = URLError.Code(rawValue: (error as NSError).code)
-        switch code {
-        case .notConnectedToInternet: return .notConnected
-        case .cancelled: return .cancelled
-        default: return .notConnected
-        }
-    }
-    
     private func request(request: URLRequest, completion: @escaping CompletionHandler) -> NetworkCancellable {
         return urlSession.request(request) { data, response, requestError in
             if let requestError = requestError {
@@ -64,6 +53,15 @@ public final class NetworkService: Networkable {
             } else {
                 completion(.success(data))
             }
+        }
+    }
+    
+    private func resolve(error: Error) -> NetworkError {
+        let code = URLError.Code(rawValue: (error as NSError).code)
+        switch code {
+        case .notConnectedToInternet: return .notConnected
+        case .cancelled: return .cancelled
+        default: return .generic(error)
         }
     }
     

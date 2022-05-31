@@ -22,7 +22,7 @@ extension DefaultIconRepository: IconRepository {
         let endpoint = APIEndpoints.getIcon(with: iconPath)
 
         task = self.networkService.request(with: endpoint) { (result: Result<Data?, NetworkError>) in
-            let result = result.mapError { NetworkError.generic(error: $0) }
+            let result = result.mapError { NetworkError.generic($0) }
             DispatchQueue.main.async { completion(result) }
         }
         

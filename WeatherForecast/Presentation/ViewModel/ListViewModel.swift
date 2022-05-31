@@ -76,19 +76,19 @@ final class DefaultListViewModel: ListViewModel {
         }
     }
     
-    private func handle(error: NetworkError) {
+    private func handle(error: DataRepositoryError) {
         self.items.value.removeAll()
         switch error {
-        case .notConnected:
-            self.error.value = "No internet connection"
+        case .networkFailure(let error):
+            print("Log: Network Error \(error.localizedDescription)")
+            self.error.value = "Check your internet connection"
+        case .noResponse:
+            self.error.value = "Can't find related locations"
+        case .parsing(let error):
+            print("Log: Parsing Error \(error.localizedDescription)")
+            self.error.value = "Something went wrong. Check your input again!"
         case .invalidInput:
             self.error.value = "Search information must have at least 3 characters"
-        case .invalidJSON, .invalidURL:
-            self.error.value = "Something went wrong. Check your input again!"
-        case .error(_, data: nil):
-            self.error.value = "Can't find related locations"
-        default:
-            self.error.value = "Something went wrong. Please try again!"
         }
     }
 }
@@ -96,10 +96,6 @@ final class DefaultListViewModel: ListViewModel {
 // MARK: - INPUT. View event methods
 extension DefaultListViewModel {
     func didSearch(query: String) {
-        guard query.count >= 3 else {
-            self.handle(error: .invalidInput)
-            return
-        }
         self.query(with: query)
     }
 }
