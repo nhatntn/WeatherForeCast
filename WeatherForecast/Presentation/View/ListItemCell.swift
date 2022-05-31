@@ -20,8 +20,6 @@ final class ListItemCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     
     private var viewModel: ListItemViewModel!
-    private var iconRepository: IconRepository?
-    private var imageLoadTask: NetworkCancellable? { willSet { imageLoadTask?.cancel() } }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,29 +33,25 @@ final class ListItemCell: UITableViewCell {
         }
     }
     
-    func fill(with viewModel: ListItemViewModel, iconRepository: IconRepository?) {
+    private func bind(to viewModel: ListItemViewModel) {
+        viewModel.icon.observe(on: self) { [weak self] image in self?.updateIcon(with: image) }
+    }
+    
+    func fill(with viewModel: ListItemViewModel) {
         self.viewModel = viewModel
-        self.iconRepository = iconRepository
+        bind(to: viewModel)
         
         dateLabel.text = "Date: \(viewModel.dateLabel ?? "")"
         averageTempLabel.text = "Avarage Temperature: \(viewModel.averageTempLabel ?? "")°C"
         pressureLabel.text = "Pressure: \(viewModel.pressureLabel ?? "")"
         humidityLabel.text = "Humidity: \(viewModel.humidityLabel ?? "")%"
         descriptionLabel.text = "Description: \(viewModel.descriptionLabel ?? "")"
-        updateIcon()
+        
+        viewModel.loadIcon()
     }
     
-    private func updateIcon() {
-        iconImageView.image = nil
-        guard let iconPath = viewModel.icon else { return }
-
-        imageLoadTask = iconRepository?.fetchImage(with: iconPath + "@2x.png") { [weak self] result in
-            guard let self = self else { return }
-            guard self.viewModel.icon == iconPath else { return }
-            if case let .success(data) = result {
-                self.iconImageView.image = UIImage(data: data ?? Data())
-            }
-            self.imageLoadTask = nil
-        }
+    private func updateIcon(with image: UIImage?) {
+        guard let image = image else { return }
+        iconImageView.image = image
     }
 }

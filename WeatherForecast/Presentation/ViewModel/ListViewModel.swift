@@ -15,7 +15,6 @@ protocol ListViewModelOutput {
     var items: Observable<[ListItemViewModel]> { get }
     var query: Observable<String> { get }
     var error: Observable<String> { get }
-    var icon: Observable<Data?> { get }
     var screenTitle: String { get }
     var searchBarPlaceholder: String { get }
 }
@@ -57,22 +56,8 @@ final class DefaultListViewModel: ListViewModel {
     }
     
     private func load(with items: [WeatherForecastItem]) {
-        self.items.value = items.map {
-            let timeStr = DateFormatterHelper.stringForDateInterval(
-                timeIntervalSince1970: $0.dateInterval,
-                format: "EEE, dd MMM yyyy",
-                timeIntervalType: .seconds
-            )
-            
-            let averageTemp = Int((($0.temperature.max + $0.temperature.min) / 2.0).rounded(.toNearestOrEven))
-            let description = $0.weatherItems.compactMap({ $0.description }).joined(separator: ", ")
-            
-            return ListItemViewModel(dateLabel: timeStr,
-                                     averageTempLabel: "\(averageTemp)",
-                                     pressureLabel: "\($0.pressure)",
-                                     humidityLabel: "\($0.humidity)",
-                                     descriptionLabel: description,
-                                     icon: $0.weatherItems.first?.icon ?? "")
+        self.items.value = items.map{
+            ListItemViewModel.init(from: $0, iconRepository: iconRepository)
         }
     }
     
@@ -91,10 +76,8 @@ final class DefaultListViewModel: ListViewModel {
             self.error.value = "Search information must have at least 3 characters"
         }
     }
-}
-
-// MARK: - INPUT. View event methods
-extension DefaultListViewModel {
+    
+    // MARK: - INPUT. View event methods
     func didSearch(query: String) {
         self.query(with: query)
     }

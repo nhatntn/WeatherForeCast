@@ -108,7 +108,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.fill(with: viewModel.items.value[indexPath.row], iconRepository: iconRepository)
+        cell.fill(with: viewModel.items.value[indexPath.row])
         return cell
     }
 
